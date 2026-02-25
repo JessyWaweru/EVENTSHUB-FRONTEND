@@ -77,7 +77,7 @@ export default function EventForm({
     <div className="flex items-center justify-center min-h-screen mb-5 py-10">
       <Card className="w-full max-w-2xl shadow-lg border-muted">
         <CardHeader>
-          <CardTitle className="text-center text-2xl text-rose-600 uppercase tracking-wider">
+          <CardTitle className="text-center text-2xl text-primary uppercase tracking-wider">
             {isUpdatePage ? "Update this event" : "Create a new event"}
           </CardTitle>
         </CardHeader>
@@ -177,7 +177,7 @@ export default function EventForm({
 
             <Button 
               type="submit" 
-              className="w-48 mx-auto mt-4 bg-rose-600 hover:bg-rose-700 text-white"
+              className="w-48 mx-auto mt-4 bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               {isUpdatePage ? "Update" : "Create"} Event
             </Button>

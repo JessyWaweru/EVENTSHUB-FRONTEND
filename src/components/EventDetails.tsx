@@ -119,7 +119,7 @@ export default function EventDetails() {
           backgroundPosition: "center"
         }}
       >
-        <h1 className="uppercase text-rose-500 text-4xl md:text-5xl font-extrabold text-center drop-shadow-md z-10">
+        <h1 className="uppercase text-primary text-4xl md:text-5xl font-extrabold text-center drop-shadow-md z-10">
           {event.title}
         </h1>
         <p className="text-gray-200 text-lg md:text-xl text-center mt-4 font-light z-10">
@@ -141,10 +141,10 @@ export default function EventDetails() {
           {/* About Section */}
           <section>
             <div className="flex items-center gap-4 mb-4">
-              <div className="h-12 w-12 rounded-full bg-rose-600 text-white flex items-center justify-center shadow-md">
+              <div className="h-12 w-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-md">
                 <Star size={24} />
               </div>
-              <h3 className="text-2xl text-gray-800 font-bold uppercase border-b-2 border-rose-600 pb-1">
+              <h3 className="text-2xl text-gray-800 font-bold uppercase border-b-2 border-primary pb-1">
                 About the event
               </h3>
             </div>
@@ -159,10 +159,10 @@ export default function EventDetails() {
           {event.speakers && event.speakers.length > 0 && (
             <section>
               <div className="flex items-center gap-4 mb-6">
-                <div className="h-12 w-12 rounded-full bg-rose-600 text-white flex items-center justify-center shadow-md">
+                <div className="h-12 w-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-md">
                   <Users size={24} />
                 </div>
-                <h3 className="text-2xl text-gray-800 font-bold uppercase border-b-2 border-rose-600 pb-1">
+                <h3 className="text-2xl text-gray-800 font-bold uppercase border-b-2 border-primary pb-1">
                   Guest of Honor
                 </h3>
               </div>
@@ -173,10 +173,10 @@ export default function EventDetails() {
                     <img
                       src={speaker.image}
                       alt={speaker.name}
-                      className="w-32 h-32 object-cover rounded-full border-4 border-rose-100 mb-4"
+                      className="w-32 h-32 object-cover rounded-full border-4 border-primary/20 mb-4"
                     />
                     <h4 className="text-xl font-bold text-gray-800">{speaker.name}</h4>
-                    <p className="text-sm font-semibold text-rose-600">{speaker.organisation}</p>
+                    <p className="text-sm font-semibold text-primary">{speaker.organisation}</p>
                     <p className="text-sm text-gray-500">{speaker.job_title}</p>
                   </Card>
                 ))}
@@ -194,7 +194,7 @@ export default function EventDetails() {
             <CardContent className="p-6 space-y-4">
               
               <div className="flex items-center gap-3 text-gray-700">
-                <MapPin className="text-rose-600" size={20} />
+                <MapPin className="text-primary" size={20} />
                 <div>
                   <p className="text-sm text-gray-500">Location</p>
                   <p className="font-bold">{event.location}</p>
@@ -202,7 +202,7 @@ export default function EventDetails() {
               </div>
 
               <div className="flex items-center gap-3 text-gray-700">
-                <Calendar className="text-rose-600" size={20} />
+                <Calendar className="text-primary" size={20} />
                 <div>
                   <p className="text-sm text-gray-500">Date</p>
                   <p className="font-bold">{formatDate(event.date)}</p>
@@ -210,7 +210,7 @@ export default function EventDetails() {
               </div>
 
               <div className="flex items-center gap-3 text-gray-700">
-                <DollarSign className="text-rose-600" size={20} />
+                <DollarSign className="text-primary" size={20} />
                 <div>
                   <p className="text-sm text-gray-500">Price</p>
                   <p className="font-bold">{event.price === 0 ? "Free" : `KES ${event.price}`}</p>
@@ -218,7 +218,7 @@ export default function EventDetails() {
               </div>
 
               <div className="flex items-center gap-3 text-gray-700">
-                <User className="text-rose-600" size={20} />
+                <User className="text-primary" size={20} />
                 <div>
                   <p className="text-sm text-gray-500">Age Limit</p>
                   <p className="font-bold">{event.age_limit}</p>
@@ -226,7 +226,7 @@ export default function EventDetails() {
               </div>
 
               <div className="flex items-center gap-3 text-gray-700">
-                <Star className="text-rose-600" size={20} />
+                <Star className="text-primary" size={20} />
                 <div>
                   <p className="text-sm text-gray-500">Planner</p>
                   <p className="font-bold">{event.event_planner_name}</p>
@@ -234,7 +234,7 @@ export default function EventDetails() {
               </div>
 
               <div className="flex items-center gap-3 text-gray-700">
-                <Hash className="text-rose-600" size={20} />
+                <Hash className="text-primary" size={20} />
                 <div>
                   <p className="text-sm text-gray-500">Capacity</p>
                   <p className="font-bold">{event.capacity} people</p>
@@ -245,7 +245,7 @@ export default function EventDetails() {
 
               <Button 
                 onClick={handleBookTicket}
-                className="w-full bg-rose-600 hover:bg-rose-700 text-white flex gap-2"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground flex gap-2"
                 size="lg"
                 disabled={isBooked}
               >

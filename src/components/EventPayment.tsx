@@ -184,7 +184,7 @@ const EventPayment: React.FC<EventPaymentProps> = ({ handleBooking }) => {
           )}
 
           <Button 
-            className="w-full bg-rose-600 hover:bg-rose-700 text-white mt-4" 
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground mt-4" 
             type="submit"
             disabled={!paymentMethod}
           >

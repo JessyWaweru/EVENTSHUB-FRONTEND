@@ -37,12 +37,12 @@ export default function EventItem({ title, location, date, id, image }: EventIte
       {/* Details Section */}
       <CardContent className="p-4 flex-grow flex flex-col gap-3 text-sm text-gray-700">
         <div className="flex items-center gap-2">
-          <MapPin className="text-rose-600 shrink-0" size={18} />
+          <MapPin className="text-primary shrink-0" size={18} />
           <p className="font-semibold truncate">{location}</p>
         </div>
         
         <div className="flex items-center gap-2">
-          <CalendarDays className="text-rose-600 shrink-0" size={18} />
+          <CalendarDays className="text-primary shrink-0" size={18} />
           <p className="font-semibold">{formatDate(date)}</p>
         </div>
       </CardContent>
@@ -50,7 +50,7 @@ export default function EventItem({ title, location, date, id, image }: EventIte
       {/* Action Section */}
       <CardFooter className="p-4 pt-0 mt-auto">
         {/* Using shadcn's 'asChild' prop allows the Button to perfectly wrap the React Router Link */}
-        <Button asChild className="w-full bg-rose-600 hover:bg-rose-700 text-white">
+        <Button asChild className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
           <Link to={`/EventDetails/${id}`}>
             Details
           </Link>
