@@ -1,22 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "@/providers/Auth.Provider";
-import EventForm from "../components/EventForm";
-
-// Define the shape of the event data coming from the form
-export interface EventData {
-  title: string;
-  image: string;
-  description: string;
-  location: string;
-  age_limit: string;
-  capacity: number;
-  date: string;
-  price: number;
-  event_planner_name: string;
-  event_planner_contact: string;
-  sponsor?: number | null; // Optional if not all events have sponsors immediately
-}
+import EventForm, { type EventData } from "../components/EventForm";
 
 export default function AddEvent() {
   const navigate = useNavigate();
@@ -31,6 +16,7 @@ export default function AddEvent() {
       
       const response = await fetch("http://127.0.0.1:8000/api/events/", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
           // "Authorization": `Token ${token}` // Will be handled by HttpOnly cookies or session later
