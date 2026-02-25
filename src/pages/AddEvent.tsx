@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../providers/Auth.provider";
+import { useAuthContext } from "@/providers/Auth.Provider";
 import EventForm from "../components/EventForm";
 
 // Define the shape of the event data coming from the form
