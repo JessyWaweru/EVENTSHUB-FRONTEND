@@ -1,29 +1,29 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "@/providers/Auth.Provider";
+import { useAuth } from "@clerk/clerk-react";
 import EventForm, { type EventData } from "../components/EventForm";
 
 export default function AddEvent() {
   const navigate = useNavigate();
   const [message, setMessage] = useState<string>("");
   
-  // Assuming user has an id property in your auth context
-  const { user } = useAuthContext();
+  // Clerk hook to get the token
+  const { getToken } = useAuth();
 
   const handleSubmit = async (newEvent: EventData) => {
     try {
       console.log("Add event button clicked");
       
+      const token = await getToken();
+
       const response = await fetch("http://127.0.0.1:8000/api/events/", {
         method: "POST",
-        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          // "Authorization": `Token ${token}` // Will be handled by HttpOnly cookies or session later
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({
           ...newEvent,
-          user: user?.id, // Django expects the field name 'user' for the foreign key ID
         }),
       });
   

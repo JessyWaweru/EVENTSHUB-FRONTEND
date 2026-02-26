@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "@clerk/clerk-react";
 import EventForm, { type EventData } from "../components/EventForm";
 
 export default function UpdateEvent() {
@@ -8,12 +9,18 @@ export default function UpdateEvent() {
   
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { getToken } = useAuth();
 
   // Fetch the existing event data to populate the form
   useEffect(() => {
     const getEvent = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/api/events/${id}/`);
+        const token = await getToken();
+        const response = await fetch(`http://127.0.0.1:8000/api/events/${id}/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         
         if (response.ok) {
           const data = await response.json();
@@ -30,19 +37,21 @@ export default function UpdateEvent() {
     if (id) {
       getEvent();
     }
-  }, [id]);
+  }, [id, getToken]);
 
   const handleUpdateEvent = async (eventDetails: EventData) => {
     try {
       setErrorMsg(""); // Clear any previous errors
       
+      const token = await getToken();
+
       const response = await fetch(`http://127.0.0.1:8000/api/events/${id}/`, {
         // We use PUT to replace the entire event resource, or you can use PATCH for partial updates
         method: "PUT", 
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
         },
-        credentials: "include", // Crucial for Django to verify the user is logged in
         body: JSON.stringify(eventDetails),
       });
 

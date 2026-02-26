@@ -3,14 +3,14 @@ import { CalendarDays, MapPin, Users } from "lucide-react";
 
 export default function Highlights() {
   return (
-    <div className="flex flex-col md:flex-row justify-evenly items-center w-full md:w-3/4 m-auto h-auto md:h-[50vh] py-10 md:py-0 text-gray-700 gap-10 md:gap-4">
+    <div className="flex flex-col md:flex-row justify-evenly items-center w-full md:w-3/4 m-auto h-auto md:min-h-[50vh] py-10 text-gray-700 gap-10 md:gap-4">
       
       {/* Highlight 1 */}
       <div className="flex flex-col gap-4 items-center w-60">
-        <div className="rounded-full h-40 w-40 bg-gray-400 flex items-center justify-center text-white transition-colors duration-300 hover:bg-rose-600 shadow-md">
+        <div className="rounded-full h-40 w-40 bg-gray-400 flex items-center justify-center text-white transition-colors duration-300 hover:bg-primary shadow-md">
           <CalendarDays size={48} />
         </div>
-        <h3 className="border-b-2 border-rose-600 pb-3 font-semibold tracking-wide">
+        <h3 className="border-b-2 border-primary pb-3 font-semibold tracking-wide">
           24/7 AVAILABLE EVENTS
         </h3>
         <p className="text-center text-sm leading-relaxed">
@@ -20,10 +20,10 @@ export default function Highlights() {
 
       {/* Highlight 2 */}
       <div className="flex flex-col gap-4 items-center w-60">
-        <div className="rounded-full h-40 w-40 bg-gray-400 flex items-center justify-center text-white transition-colors duration-300 hover:bg-rose-600 shadow-md">
+        <div className="rounded-full h-40 w-40 bg-gray-400 flex items-center justify-center text-white transition-colors duration-300 hover:bg-primary shadow-md">
           <MapPin size={48} />
         </div>
-        <h3 className="border-b-2 border-rose-600 pb-3 font-semibold tracking-wide">
+        <h3 className="border-b-2 border-primary pb-3 font-semibold tracking-wide">
           GREAT LOCATIONS
         </h3>
         <p className="text-center text-sm leading-relaxed">
@@ -33,10 +33,10 @@ export default function Highlights() {
 
       {/* Highlight 3 */}
       <div className="flex flex-col gap-4 items-center w-60">
-        <div className="rounded-full h-40 w-40 bg-gray-400 flex items-center justify-center text-white transition-colors duration-300 hover:bg-rose-600 shadow-md">
+        <div className="rounded-full h-40 w-40 bg-gray-400 flex items-center justify-center text-white transition-colors duration-300 hover:bg-primary shadow-md">
           <Users size={48} />
         </div>
-        <h3 className="border-b-2 border-rose-600 pb-3 font-semibold tracking-wide">
+        <h3 className="border-b-2 border-primary pb-3 font-semibold tracking-wide">
           NETWORK OPPORTUNITIES
         </h3>
         <p className="text-center text-sm leading-relaxed">

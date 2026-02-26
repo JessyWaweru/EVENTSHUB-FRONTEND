@@ -1,35 +1,76 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
 
-function App() {
-  const [count, setCount] = useState(0)
+// Pages
+import Home from "./pages/Home";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import AddEvent from "./pages/AddEvent";
+import EventDetails from "./components/EventDetails";
+import EventsHome from "./pages/EventsHome";
+import UpdateEvent from "./pages/UpdateEvent";
+import EventsList from "./pages/EventsList";
 
+// Components
+import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
+
+/**
+ * Layout for routes that are public but still have the main navbar.
+ */
+const PublicLayout = () => (
+  <>
+    <Navbar />
+    <main className="flex-grow">
+      <Outlet />
+    </main>
+  </>
+);
+
+/**
+ * Layout for routes that are protected and require a user to be signed in.
+ */
+const ProtectedLayout = () => (
+  <>
+    <SignedIn>
+      <Navbar />
+      <main className="flex-grow">
+        <Outlet />
+      </main>
+    </SignedIn>
+    <SignedOut>
+      <RedirectToSignIn />
+    </SignedOut>
+  </>
+);
+
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <BrowserRouter>
+      <div className="flex flex-col min-h-screen">
+        <Routes>
+          {/* Auth routes - they don't have the main Navbar */}
+          <Route path="/signIn/*" element={<SignIn />} />
+          <Route path="/signUp/*" element={<SignUp />} />
 
-export default App
+          {/* Public routes with Navbar */}
+          <Route element={<PublicLayout />}>
+            <Route path="/" element={<Home />} />
+            {/* The /reset route is removed as Clerk's <SignIn> component handles password resets. */}
+          </Route>
+
+          {/* Protected routes with Navbar */}
+          <Route element={<ProtectedLayout />}>
+            <Route path="/events" element={<EventsList />} />
+            <Route path="/addEvent" element={<AddEvent />} />
+            <Route path="/EventDetails/:id" element={<EventDetails />} />
+            <Route path="/updateEvent/:id" element={<UpdateEvent />} />
+            <Route path="/EventsHome" element={<EventsHome />} />
+          </Route>
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
+  );
+}

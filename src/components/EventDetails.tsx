@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useAuthContext } from "@/providers/Auth.Provider";
-import formatDate from "../utilities/formatdate";
+import { useUser, useAuth } from "@clerk/clerk-react";
+import formatDate from "@/utilities/formatdate";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -38,14 +38,15 @@ export interface EventDetailsData {
   price: number;
   event_planner_name: string;
   event_planner_contact: string;
-  user: number; // Django returns the ID of the user who created it
+  user: string | number; // Django returns the ID of the user who created it
   speakers?: Speaker[]; // If you nested speakers in your Django Serializer
 }
 
 export default function EventDetails() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { user } = useAuthContext();
+  const { user } = useUser();
+  const { getToken } = useAuth();
   
   const [event, setEvent] = useState<EventDetailsData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -53,18 +54,24 @@ export default function EventDetails() {
 
   // Fetch event details from Django
   useEffect(() => {
-    // Note: Pointed to port 8000 and added the trailing slash for Django DRF
-    fetch(`http://127.0.0.1:8000/api/events/${id}/`)
-      .then((response) => response.json())
-      .then((data: EventDetailsData) => {
+    const fetchEvent = async () => {
+      try {
+        const token = await getToken();
+        const response = await fetch(`http://127.0.0.1:8000/api/events/${id}/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const data = await response.json();
         setEvent(data);
         setIsLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching event details:", error);
         setIsLoading(false);
-      });
-  }, [id]);
+      }
+    };
+    fetchEvent();
+  }, [id, getToken]);
 
   const handleBookTicket = () => {
     // Note: Later, you can hook this up to an Attendee POST request in Django!
@@ -73,11 +80,12 @@ export default function EventDetails() {
 
   const handleDelete = async () => {
     try {
+      const token = await getToken();
       const response = await fetch(`http://127.0.0.1:8000/api/events/${id}/`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          // "Authorization": `Token ${token}` // If using token auth
+          "Authorization": `Bearer ${token}`,
         },
       });
 

@@ -10,35 +10,35 @@ export default function Footer() {
         <div className="mb-9 flex justify-center items-center gap-8">
           <a
             href="#!"
-            className="text-neutral-600 hover:text-rose-600 transition-colors duration-300 dark:text-neutral-200 dark:hover:text-rose-400"
+            className="text-neutral-600 hover:text-primary transition-colors duration-300 dark:text-neutral-200 dark:hover:text-primary"
             aria-label="Facebook"
           >
             <Facebook size={24} />
           </a>
           <a
             href="#!"
-            className="text-neutral-600 hover:text-rose-600 transition-colors duration-300 dark:text-neutral-200 dark:hover:text-rose-400"
+            className="text-neutral-600 hover:text-primary transition-colors duration-300 dark:text-neutral-200 dark:hover:text-primary"
             aria-label="Twitter"
           >
             <Twitter size={24} />
           </a>
           <a
             href="#!"
-            className="text-neutral-600 hover:text-rose-600 transition-colors duration-300 dark:text-neutral-200 dark:hover:text-rose-400"
+            className="text-neutral-600 hover:text-primary transition-colors duration-300 dark:text-neutral-200 dark:hover:text-primary"
             aria-label="Instagram"
           >
             <Instagram size={24} />
           </a>
           <a
             href="#!"
-            className="text-neutral-600 hover:text-rose-600 transition-colors duration-300 dark:text-neutral-200 dark:hover:text-rose-400"
+            className="text-neutral-600 hover:text-primary transition-colors duration-300 dark:text-neutral-200 dark:hover:text-primary"
             aria-label="LinkedIn"
           >
             <Linkedin size={24} />
           </a>
           <a
             href="#!"
-            className="text-neutral-600 hover:text-rose-600 transition-colors duration-300 dark:text-neutral-200 dark:hover:text-rose-400"
+            className="text-neutral-600 hover:text-primary transition-colors duration-300 dark:text-neutral-200 dark:hover:text-primary"
             aria-label="Github"
           >
             <Github size={24} />

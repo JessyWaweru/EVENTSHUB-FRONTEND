@@ -24,14 +24,14 @@ export default function Searchbar({ setSearchValue, handleSearch }: SearchbarPro
         <Input
           type="text"
           placeholder="Search events by title..."
-          className="pl-10 bg-white border-gray-300 focus-visible:ring-rose-500"
+          className="pl-10 bg-white border-gray-300 focus-visible:ring-primary"
           onChange={(e) => setSearchValue(e.target.value)}
           onKeyDown={handleKeyDown}
         />
       </div>
       <Button 
         onClick={handleSearch} 
-        className="bg-rose-600 hover:bg-rose-700 text-white"
+        className="bg-primary hover:bg-primary/90 text-primary-foreground"
       >
         Search
       </Button>
