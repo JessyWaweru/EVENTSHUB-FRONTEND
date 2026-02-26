@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import EventItem from "../components/EventItem";
+import Searchbar from "../components/Searchbar"; // Imported our dedicated Searchbar
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Heart, Search, Plus } from "lucide-react";
+import { Heart, Plus } from "lucide-react";
 
 export interface EventData {
   id: number;
@@ -23,7 +23,6 @@ export default function EventsList() {
 
   // Handle search by title
   const handleSearch = () => {
-    console.log("Search button clicked");
     if (!searchValue.trim()) {
       setHasSearched(false);
       return;
@@ -36,10 +35,11 @@ export default function EventsList() {
     setHasSearched(true);
   };
 
-  // Allow pressing "Enter" to search
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleSearch();
+  // Wrapper for setSearchValue to auto-reset when the input is cleared
+  const handleSetSearchValue = (value: string) => {
+    setSearchValue(value);
+    if (value === "") {
+      setHasSearched(false);
     }
   };
 
@@ -48,7 +48,6 @@ export default function EventsList() {
     fetch("http://127.0.0.1:8000/api/events/")
       .then((response) => response.json())
       .then((data: EventData[]) => {
-        console.log(data);
         setEvents(data);
       })
       .catch((error) => {
@@ -84,23 +83,12 @@ export default function EventsList() {
         {/* Toolbar: Search and Add Event */}
         <div className="flex flex-col md:flex-row items-center justify-between w-full bg-white/80 backdrop-blur-md p-4 rounded-xl shadow-sm gap-4">
           
-          <div className="flex w-full md:w-1/2 items-center space-x-2">
-            <Input 
-              type="text" 
-              placeholder="Search events by title..." 
-              value={searchValue}
-              onChange={(e) => {
-                setSearchValue(e.target.value);
-                // Auto-reset search if user clears the input
-                if (e.target.value === "") setHasSearched(false);
-              }}
-              onKeyDown={handleKeyDown}
-              className="bg-white"
+          <div className="flex w-full md:w-1/2 items-center">
+            {/* Plugged in the custom Searchbar component */}
+            <Searchbar 
+              setSearchValue={handleSetSearchValue} 
+              handleSearch={handleSearch} 
             />
-            <Button onClick={handleSearch} variant="secondary" className="flex gap-2">
-              <Search size={18} />
-              <span className="hidden sm:inline">Search</span>
-            </Button>
           </div>
 
           <Button asChild className="bg-rose-600 hover:bg-rose-700 text-white w-full md:w-auto">
