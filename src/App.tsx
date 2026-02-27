@@ -31,6 +31,12 @@ const PublicLayout = () => (
 /**
  * Layout for routes that are protected and require a user to be signed in.
  */
+/**
+ * Layout for routes that are protected and require a user to be signed in.
+ */
+/**
+ * Layout for routes that are protected and require a user to be signed in.
+ */
 const ProtectedLayout = () => (
   <>
     <SignedIn>
@@ -40,11 +46,11 @@ const ProtectedLayout = () => (
       </main>
     </SignedIn>
     <SignedOut>
+      {/* Just call it empty. main.tsx tells it where to go! */}
       <RedirectToSignIn />
     </SignedOut>
   </>
 );
-
 export default function App() {
   return (
     <BrowserRouter>
