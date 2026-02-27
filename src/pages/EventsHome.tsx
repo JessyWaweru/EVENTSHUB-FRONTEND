@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@clerk/clerk-react";
-import EventItem from "../components/EventItem"; // Updated path since we are in the 'pages' folder
+import EventItem from "../components/EventItem"; 
 import { Button } from "@/components/ui/button";
 import { Heart, CalendarDays, ArrowRight } from "lucide-react";
 
-// Define the shape of the data we expect from the Django API
 export interface EventData {
   id: number;
   title: string;
@@ -21,20 +20,35 @@ export default function EventsHome() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
+        // Grab the Clerk token (will be null if the user is a guest)
         const token = await getToken();
+        
+        // Setup headers conditionally
+        const headers: HeadersInit = {
+          "Content-Type": "application/json"
+        };
+        
+        // Only attach the Authorization header if the user is logged in
+        if (token) {
+          headers["Authorization"] = `Bearer ${token}`;
+        }
+
         const response = await fetch("http://127.0.0.1:8000/api/events/", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          method: "GET",
+          headers: headers,
         });
-        const data = await response.json();
-        console.log(data);
-        if (Array.isArray(data)) {
-          setEvents(data);
-        } else if (data && Array.isArray(data.results)) {
-          setEvents(data.results);
+
+        if (response.ok) {
+          const data = await response.json();
+          if (Array.isArray(data)) {
+            setEvents(data);
+          } else if (data && Array.isArray(data.results)) {
+            setEvents(data.results);
+          } else {
+            setEvents([]);
+          }
         } else {
-          setEvents([]);
+          console.error("Failed to fetch events. Status:", response.status);
         }
       } catch (error) {
         console.error("Error fetching events:", error);
