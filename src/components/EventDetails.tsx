@@ -201,14 +201,22 @@ export default function EventDetails() {
             </CardHeader>
             <CardContent className="p-6 space-y-4">
               
-              <div className="flex items-center gap-3 text-gray-700">
+             <div className="flex items-center gap-3 text-gray-700">
                 <MapPin className="text-primary" size={20} />
                 <div>
                   <p className="text-sm text-gray-500">Location</p>
-                  <p className="font-bold">{event.location}</p>
+                  <p className="font-bold">
+                    <a 
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.location)}`}
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="hover:text-primary hover:underline transition-colors cursor-pointer"
+                    >
+                      {event.location}
+                    </a>
+                  </p>
                 </div>
               </div>
-
               <div className="flex items-center gap-3 text-gray-700">
                 <Calendar className="text-primary" size={20} />
                 <div>

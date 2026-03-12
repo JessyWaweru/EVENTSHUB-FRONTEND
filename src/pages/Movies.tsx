@@ -19,45 +19,15 @@ export default function Movies() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // For now, we mock the data. 
-    // Next step: Point this to your new Django scraping endpoint!
     const fetchMovies = async () => {
       try {
-        // Simulating network delay
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        
-        // Example structure of what your Django scraper will return from KenyaBuzz
-        const mockKenyaBuzzData: MovieData[] = [
-          {
-            id: "1",
-            title: "Dune: Part Two",
-            posterImage: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&q=80", 
-            cinema: "Century Cinemax - Sarit Centre",
-            genre: "Sci-Fi / Action",
-            duration: "2h 46m",
-            showtimes: ["11:00 AM", "2:30 PM", "6:00 PM", "9:30 PM"]
-          },
-          {
-            id: "2",
-            title: "Bob Marley: One Love",
-            posterImage: "https://images.unsplash.com/photo-1470229722913-7c092db658cb?w=800&q=80",
-            cinema: "Westgate Cinema",
-            genre: "Biography / Music",
-            duration: "1h 47m",
-            showtimes: ["1:15 PM", "4:00 PM", "8:45 PM"]
-          },
-          {
-            id: "3",
-            title: "Kung Fu Panda 4",
-            posterImage: "https://images.unsplash.com/photo-1585647347384-2593bc35786b?w=800&q=80",
-            cinema: "Anga Diamond Plaza",
-            genre: "Animation / Comedy",
-            duration: "1h 34m",
-            showtimes: ["10:30 AM", "12:45 PM", "3:00 PM", "5:15 PM"]
-          }
-        ];
-        
-        setMovies(mockKenyaBuzzData);
+        // Hitting your new Django scraping endpoint!
+        const response = await fetch("http://127.0.0.1:8000/api/movies/");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setMovies(data);
       } catch (error) {
         console.error("Error fetching movies:", error);
       } finally {
@@ -89,7 +59,7 @@ export default function Movies() {
       {isLoading ? (
         <div className="flex flex-col items-center justify-center h-64 text-rose-600">
           <Loader2 className="h-12 w-12 animate-spin mb-4" />
-          <p className="font-medium animate-pulse">Fetching latest showtimes from KenyaBuzz...</p>
+          <p className="font-medium animate-pulse">Fetching latest showtimes </p>
         </div>
       ) : (
         /* Movie Grid */

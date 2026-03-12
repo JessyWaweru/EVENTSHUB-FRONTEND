@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useUser, useClerk } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
-import { Home, CalendarDays, LogOut, LogIn, ArrowRight, PartyPopper } from "lucide-react";
+import { Home, CalendarDays, LogOut, LogIn, ArrowRight, PartyPopper,Film } from "lucide-react";
 
 export default function Navbar() {
   const { user } = useUser();
@@ -41,6 +41,15 @@ export default function Navbar() {
                   <span className="hidden sm:inline">Events</span>
                 </Link>
               </li>
+              <li>
+  <Link 
+    to="/movies" 
+    className="flex items-center gap-2 hover:text-primary transition-colors"
+  >
+    <Film size={20} />
+    <span className="hidden sm:inline">Movies</span>
+  </Link>
+</li>
               <li>
                 <Button 
                   onClick={() => signOut()} 

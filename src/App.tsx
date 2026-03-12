@@ -15,6 +15,7 @@ import EventsList from "./pages/EventsList";
 // Components
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
+import Movies from "./pages/Movies";
 
 /**
  * Layout for routes that are public but still have the main navbar.
@@ -73,6 +74,7 @@ export default function App() {
             <Route path="/EventDetails/:id" element={<EventDetails />} />
             <Route path="/updateEvent/:id" element={<UpdateEvent />} />
             <Route path="/EventsHome" element={<EventsHome />} />
+            <Route path="/movies" element={<Movies />} />
           </Route>
         </Routes>
         <Footer />

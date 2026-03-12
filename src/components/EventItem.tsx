@@ -36,9 +36,17 @@ export default function EventItem({ title, location, date, id, image }: EventIte
 
       {/* Details Section */}
       <CardContent className="p-4 flex-grow flex flex-col gap-3 text-sm text-gray-700">
-        <div className="flex items-center gap-2">
+       <div className="flex items-center gap-2">
           <MapPin className="text-primary shrink-0" size={18} />
-          <p className="font-semibold truncate">{location}</p>
+          <a 
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`}
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="font-semibold truncate hover:text-primary hover:underline cursor-pointer transition-colors"
+            onClick={(e) => e.stopPropagation()} // Prevents accidental clicking if you ever make the whole card clickable
+          >
+            {location}
+          </a>
         </div>
         
         <div className="flex items-center gap-2">
