@@ -11,6 +11,7 @@ import EventDetails from "./components/EventDetails";
 import EventsHome from "./pages/EventsHome";
 import UpdateEvent from "./pages/UpdateEvent";
 import EventsList from "./pages/EventsList";
+import MovieDetails from "./components/MovieDetails";
 
 // Components
 import Footer from "./components/Footer";
@@ -72,6 +73,8 @@ export default function App() {
             <Route path="/events" element={<EventsList />} />
             <Route path="/addEvent" element={<AddEvent />} />
             <Route path="/EventDetails/:id" element={<EventDetails />} />
+            <Route path="/Movie/:id" element={<MovieDetails />} />
+
             <Route path="/updateEvent/:id" element={<UpdateEvent />} />
             <Route path="/EventsHome" element={<EventsHome />} />
             <Route path="/movies" element={<Movies />} />

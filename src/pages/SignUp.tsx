@@ -26,17 +26,6 @@ export default function SignUp() {
             }}
           />
         </div>
-
-        {/* The Back Button at the bottom */}
-        <div className="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-center mt-auto">
-          <Button variant="ghost" asChild className="text-gray-500 hover:text-gray-900 w-full h-9">
-            <Link to="/" className="flex items-center justify-center gap-2">
-              <ArrowLeft size={16} />
-              <span className="text-sm font-medium">Back to Home</span>
-            </Link>
-          </Button>
-        </div>
-
       </Card>
     </div>
   );
